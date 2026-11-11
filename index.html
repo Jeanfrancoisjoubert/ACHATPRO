@@ -1,92 +1,942 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ACHAPRO - International Shopping Marketplace</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      color: #172033;
-    }
-    header {
-      background: #073b35;
-      color: white;
-      padding: 25px 15px;
-      text-align: center;
-    }
-    header h1 { font-size: 32px; }
-    nav {
-      background: white;
-      padding: 15px;
-      text-align: center;
-    }
-    nav a {
-      margin: 10px;
-      color: #073b35;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .hero {
-      text-align: center;
-      padding: 65px 20px;
-    }
-    .hero h2 { font-size: 30px; }
-    .button {
-      display: inline-block;
-      background: #07834f;
-      color: white;
-      padding: 14px 25px;
-      border-radius: 8px;
-      text-decoration: none;
-    }
-    .products {
-      padding: 25px;
-      text-align: center;
-    }
-    footer {
-      background: #073b35;
-      color: white;
-      padding: 25px;
-      text-align: center;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ACHATPRO - Marché international du shopping, achats, recommandations et opportunités entre les États-Unis et Haïti.">
+<title>ACHATPRO - Marché International du Shopping</title>
+
+<style>
+:root {
+  --green: #073b35;
+  --green2: #087b50;
+  --gold: #d6a83f;
+  --light: #f4f7f5;
+  --dark: #172b27;
+  --white: #ffffff;
+  --gray: #64736e;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: Arial, sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+}
+a { text-decoration: none; color: inherit; }
+button, input, select, textarea {
+  font: inherit;
+}
+button { cursor: pointer; }
+
+.topbar {
+  background: var(--green);
+  color: white;
+  text-align: center;
+  padding: 9px;
+  font-size: 13px;
+}
+header {
+  background: white;
+  padding: 17px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #e6ece8;
+}
+.logo {
+  font-size: 27px;
+  font-weight: 900;
+  color: var(--green);
+}
+.logo span { color: var(--gold); }
+.logo small {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gray);
+}
+.header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.btn {
+  display: inline-block;
+  padding: 11px 19px;
+  border: 0;
+  border-radius: 7px;
+  font-weight: bold;
+  text-align: center;
+}
+.btn-green {
+  background: var(--green2);
+  color: white;
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--green);
+}
+.btn-outline {
+  border: 1px solid var(--green);
+  color: var(--green);
+  background: white;
+}
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 15px;
+  background: var(--green);
+  color: white;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+nav a:hover { color: var(--gold); }
+
+.hero {
+  background: linear-gradient(120deg, #073b35, #116b4c);
+  color: white;
+  padding: 75px 7%;
+  text-align: center;
+}
+.hero h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  margin-bottom: 15px;
+}
+.hero h1 span { color: var(--gold); }
+.hero p {
+  max-width: 700px;
+  margin: 0 auto 25px;
+  color: #e4eee9;
+}
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero-note {
+  margin-top: 25px;
+  font-size: 13px;
+  color: #dce9e3;
+}
+
+.search-area {
+  background: white;
+  padding: 22px 5%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.search-area input {
+  width: min(550px, 100%);
+  padding: 13px;
+  border: 1px solid #ccd7d1;
+  border-radius: 7px;
+}
+
+.section {
+  padding: 55px 6%;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.section-title h2 {
+  color: var(--green);
+  font-size: 29px;
+}
+.section-title p { color: var(--gray); }
+
+.categories, .products-grid, .features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 18px;
+}
+.category {
+  padding: 25px 15px;
+  background: white;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #e3ebe5;
+}
+.category .emoji { font-size: 35px; }
+.category h3 { color: var(--green); margin: 8px; }
+
+.product-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e4ebe6;
+  text-align: center;
+}
+.product-icon {
+  height: 115px;
+  display: grid;
+  place-items: center;
+  background: #edf4ef;
+  border-radius: 9px;
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+.product-card h3 { color: var(--green); }
+.product-card p {
+  color: var(--gray);
+  font-size: 13px;
+  margin: 8px 0 15px;
+}
+.product-card .btn { margin: 4px; }
+
+.notice {
+  background: #fff8e7;
+  border-left: 4px solid var(--gold);
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+.features { margin-top: 20px; }
+.feature {
+  padding: 23px;
+  border-radius: 10px;
+  background: white;
+  border: 1px solid #e2eae4;
+}
+.feature h3 { color: var(--green); margin-bottom: 8px; }
+.feature p { color: var(--gray); font-size: 14px; }
+
+.dark-section {
+  background: var(--green);
+  color: white;
+}
+.dark-section .section-title h2 { color: white; }
+.dark-section .section-title p { color: #d3e1da; }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 15px;
+}
+.step {
+  background: #ffffff12;
+  border: 1px solid #ffffff35;
+  padding: 20px;
+  border-radius: 10px;
+}
+.step strong {
+  display: block;
+  color: var(--gold);
+  font-size: 23px;
+  margin-bottom: 8px;
+}
+
+.panel {
+  background: white;
+  padding: 28px;
+  border-radius: 12px;
+  max-width: 800px;
+  margin: auto;
+  box-shadow: 0 4px 20px #00000008;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.form-group.full { grid-column: 1 / -1; }
+.form-group label { font-weight: bold; font-size: 14px; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccd8d1;
+  border-radius: 6px;
+  background: white;
+}
+.form-group textarea { min-height: 100px; }
+
+.referral-box {
+  background: #edf5ef;
+  padding: 22px;
+  border-radius: 10px;
+  margin-top: 18px;
+}
+.referral-code {
+  font-size: 24px;
+  color: var(--green);
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin: 12px 0;
+}
+.status-message {
+  display: none;
+  padding: 13px;
+  margin-top: 14px;
+  background: #e7f5eb;
+  color: var(--green);
+  border-radius: 6px;
+}
+
+footer {
+  background: #052b26;
+  color: white;
+  padding: 45px 6% 20px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+footer h3 { color: var(--gold); margin-bottom: 12px; }
+footer p, footer a {
+  color: #d5e2db;
+  font-size: 14px;
+  display: block;
+  margin: 7px 0;
+}
+.copyright {
+  border-top: 1px solid #ffffff30;
+  text-align: center;
+  padding-top: 18px;
+  font-size: 12px;
+  color: #b8c9c0;
+}
+.cart-count {
+  background: var(--gold);
+  color: var(--green);
+  border-radius: 50%;
+  padding: 2px 7px;
+}
+.hidden { display: none !important; }
+
+@media(max-width:600px) {
+  header { justify-content: center; text-align: center; }
+  nav { gap: 13px; font-size: 12px; }
+  .hero { padding: 55px 5%; }
+  .section { padding: 40px 5%; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: auto; }
+  .header-actions { justify-content: center; flex-wrap: wrap; }
+}
+</style>
 </head>
+
 <body>
-  <header>
-    <h1>ACHAPRO</h1>
-    <p>International Shopping Marketplace</p>
-  </header>
 
-  <nav>
-    <a href="#home">Accueil</a>
-    <a href="#products">Produits</a>
-    <a href="#pharmacy">Pharmacie</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<div class="topbar">
+  ACHATPRO — Votre passerelle vers le shopping international
+</div>
 
-  <section class="hero" id="home">
-    <h2>Bienvenue sur ACHAPRO</h2>
-    <p>Votre marché international pour acheter et découvrir des produits.</p>
-    <a class="button" href="#products">Découvrir les produits</a>
-  </section>
+<header>
+  <a class="logo" href="#home">
+    ACHAT<span>PRO</span>
+    <small>MARCHÉ INTERNATIONAL DU SHOPPING</small>
+  </a>
 
-  <section class="products" id="products">
+  <div class="header-actions">
+    <a class="btn btn-outline" href="#demande">Mon compte</a>
+    <a class="btn btn-green" href="#panier">
+      Panier <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </div>
+</header>
+
+<nav>
+  <a href="#home">Accueil</a>
+  <a href="#categories">Catégories</a>
+  <a href="#produits">Produits</a>
+  <a href="#recommandations">Recommandations</a>
+  <a href="#promotions">Promotions</a>
+  <a href="#parrainage">Parrainage</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section class="hero" id="home">
+  <h1>Bienvenue sur <span>ACHATPRO</span></h1>
+  <p>
+    Achetez, vendez, recommandez et gagnez.
+    Découvrez un marché international qui rapproche
+    les opportunités commerciales des États-Unis à Haïti.
+  </p>
+
+  <div class="hero-buttons">
+    <a class="btn btn-gold" href="#produits">Découvrir les produits</a>
+    <a class="btn btn-outline" href="#demande">Demander un achat</a>
+  </div>
+
+  <div class="hero-note">
+    ACHETER • VENDRE • RECOMMANDER • GAGNER
+  </div>
+</section>
+
+<div class="search-area">
+  <input id="searchInput" type="search"
+    placeholder="Rechercher un produit ou une catégorie...">
+  <button class="btn btn-green" onclick="searchProducts()">
+    Rechercher
+  </button>
+</div>
+
+<section class="section" id="categories">
+  <div class="section-title">
     <h2>Nos catégories</h2>
-    <p>Mode | Technologie | Maison | Beauté</p>
-  </section>
+    <p>Explorez les univers de produits disponibles sur ACHATPRO.</p>
+  </div>
 
-  <section class="products" id="pharmacy">
-    <h2>Pharmacie</h2>
-    <p>Découvrez notre espace dédié aux produits de santé autorisés.</p>
-  </section>
+  <div class="categories">
+    <a class="category" href="#produits" onclick="filterCategory('Mode')">
+      <div class="emoji">👕</div>
+      <h3>Mode</h3>
+      <p>Vêtements et accessoires</p>
+    </a>
+    <a class="category" href="#produits" onclick="filterCategory('Technologie')">
+      <div class="emoji">📱</div>
+      <h3>Technologie</h3>
+      <p>Électronique et accessoires</p>
+    </a>
+    <a class="category" href="#produits" onclick="filterCategory('Maison')">
+      <div class="emoji">🏠</div>
+      <h3>Maison</h3>
+      <p>Équipements et décoration</p>
+    </a>
+    <a class="category" href="#produits" onclick="filterCategory('Beauté')">
+      <div class="emoji">💄</div>
+      <h3>Beauté</h3>
+      <p>Beauté et soins</p>
+    </a>
+    <a class="category" href="#pharmacie">
+      <div class="emoji">🏥</div>
+      <h3>Pharmacie</h3>
+      <p>Produits de santé autorisés</p>
+    </a>
+    <a class="category" href="#produits" onclick="filterCategory('Autres')">
+      <div class="emoji">🌍</div>
+      <h3>Autres</h3>
+      <p>Autres opportunités</p>
+    </a>
+  </div>
+</section>
 
-  <footer id="contact">
-    <h3>ACHAPRO</h3>
-    <p>International Shopping Marketplace</p>
-    <p>Contactez-nous prochainement.</p>
-  </footer>
+<section class="section" id="produits">
+  <div class="section-title">
+    <h2>Notre catalogue</h2>
+    <p>Découvrez les familles de produits et demandez un devis.</p>
+  </div>
+
+  <div class="products-grid" id="productGrid">
+
+    <article class="product-card" data-category="Mode">
+      <div class="product-icon">👟</div>
+      <h3>Mode et chaussures</h3>
+      <p>Vêtements, chaussures et accessoires.</p>
+      <button class="btn btn-green"
+        onclick="requestProduct('Mode et chaussures')">
+        Demander un prix
+      </button>
+    </article>
+
+    <article class="product-card" data-category="Technologie">
+      <div class="product-icon">💻</div>
+      <h3>Technologie</h3>
+      <p>Téléphones, ordinateurs et accessoires.</p>
+      <button class="btn btn-green"
+        onclick="requestProduct('Technologie')">
+        Demander un prix
+      </button>
+    </article>
+
+    <article class="product-card" data-category="Maison">
+      <div class="product-icon">🛋️</div>
+      <h3>Maison</h3>
+      <p>Équipements, décoration et mobilier.</p>
+      <button class="btn btn-green"
+        onclick="requestProduct('Maison')">
+        Demander un prix
+      </button>
+    </article>
+
+    <article class="product-card" data-category="Beauté">
+      <div class="product-icon">✨</div>
+      <h3>Beauté et soins</h3>
+      <p>Accessoires et produits de beauté.</p>
+      <button class="btn btn-green"
+        onclick="requestProduct('Beauté et soins')">
+        Demander un prix
+      </button>
+    </article>
+
+    <article class="product-card" data-category="Autres">
+      <div class="product-icon">🎁</div>
+      <h3>Autres produits</h3>
+      <p>Faites-nous connaître votre besoin.</p>
+      <button class="btn btn-green"
+        onclick="requestProduct('Autres produits')">
+        Demander un prix
+      </button>
+    </article>
+
+  </div>
+
+  <div class="notice">
+    Les produits présentés sont des catégories de démonstration.
+    Les prix, stocks, fournisseurs et délais seront confirmés
+    avant chaque commande.
+  </div>
+</section>
+
+<section class="section" id="recommandations">
+  <div class="section-title">
+    <h2>Produits recommandés</h2>
+    <p>Découvrez des suggestions et partagez vos bonnes trouvailles.</p>
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <h3>⭐ Sélection populaire</h3>
+      <p>Un espace pour mettre en avant les produits appréciés par les clients.</p>
+    </div>
+    <div class="feature">
+      <h3>💡 Suggestions personnalisées</h3>
+      <p>Des recommandations adaptées aux besoins des acheteurs.</p>
+    </div>
+    <div class="feature">
+      <h3>🔗 Partage de produits</h3>
+      <p>Recommandez des produits et participez au programme de parrainage.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section dark-section" id="promotions">
+  <div class="section-title">
+    <h2>Promotions et réductions</h2>
+    <p>Un espace consacré aux offres spéciales et aux avantages clients.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="color:#073b35">🎟️ Code promotionnel</h3>
+    <p style="margin:10px 0">
+      Entrez un code promotionnel pour vérifier les conditions
+      d'une offre.
+    </p>
+
+    <div class="form-group">
+      <input id="couponInput" placeholder="Entrez votre code promotionnel">
+    </div>
+
+    <button class="btn btn-green" onclick="checkCoupon()">
+      Vérifier le code
+    </button>
+
+    <div class="status-message" id="couponMessage"></div>
+  </div>
+</section>
+
+<section class="section" id="parrainage">
+  <div class="section-title">
+    <h2>Programme de parrainage</h2>
+    <p>Recommandez ACHATPRO et découvrez les possibilités de récompenses.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="color:#073b35">🤝 Invitez vos proches</h3>
+    <p>
+      Partagez ACHATPRO avec vos amis et votre réseau.
+      Les récompenses et commissions seront définies
+      selon les conditions officielles du programme.
+    </p>
+
+    <div class="referral-box">
+      <strong>Votre code de démonstration</strong>
+      <div class="referral-code" id="referralCode">ACHATPRO2026</div>
+      <button class="btn btn-green" onclick="copyReferral()">
+        Copier mon code
+      </button>
+      <p style="font-size:12px;margin-top:10px">
+        Ce code est une démonstration. Les codes personnels
+        nécessitent un système de comptes et une base de données.
+      </p>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <h3>🎁 Récompenses</h3>
+        <p>Avantages selon les achats admissibles et les règles du programme.</p>
+      </div>
+      <div class="feature">
+        <h3>💰 Commissions</h3>
+        <p>Possibilité de commissions pour les recommandations validées.</p>
+      </div>
+      <div class="feature">
+        <h3>📊 Suivi</h3>
+        <p>Un tableau de bord permettra de suivre les parrainages et les gains.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark-section" id="international">
+  <div class="section-title">
+    <h2>Achats internationaux</h2>
+    <p>Un processus organisé entre les États-Unis et Haïti.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <strong>01</strong>
+      Envoyez votre produit ou son lien.
+    </div>
+    <div class="step">
+      <strong>02</strong>
+      Vérification du prix et de la disponibilité.
+    </div>
+    <div class="step">
+      <strong>03</strong>
+      Réception et validation du devis.
+    </div>
+    <div class="step">
+      <strong>04</strong>
+      Confirmation du paiement.
+    </div>
+    <div class="step">
+      <strong>05</strong>
+      Achat auprès du fournisseur.
+    </div>
+    <div class="step">
+      <strong>06</strong>
+      Transport et suivi de livraison.
+    </div>
+  </div>
+</section>
+
+<section class="section" id="demande">
+  <div class="section-title">
+    <h2>Demander un achat</h2>
+    <p>Décrivez le produit que vous souhaitez acheter à l'international.</p>
+  </div>
+
+  <div class="panel">
+    <form id="purchaseForm">
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Nom complet</label>
+          <input name="name" required placeholder="Votre nom">
+        </div>
+
+        <div class="form-group">
+          <label>Adresse e-mail</label>
+          <input name="email" type="email" placeholder="Votre e-mail">
+        </div>
+
+        <div class="form-group">
+          <label>Pays de destination</label>
+          <select name="country" required>
+            <option value="">Choisir un pays</option>
+            <option>Haïti</option>
+            <option>États-Unis</option>
+            <option>Autre</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Catégorie</label>
+          <select name="category">
+            <option>Mode</option>
+            <option>Technologie</option>
+            <option>Maison</option>
+            <option>Beauté</option>
+            <option>Pharmacie autorisée</option>
+            <option>Autres</option>
+          </select>
+        </div>
+
+        <div class="form-group full">
+          <label>Nom ou lien du produit</label>
+          <input name="product" id="requestedProduct"
+            required placeholder="Collez le lien ou le nom du produit">
+        </div>
+
+        <div class="form-group full">
+          <label>Informations supplémentaires</label>
+          <textarea name="details"
+            placeholder="Quantité, taille, couleur et autres précisions..."></textarea>
+        </div>
+
+        <div class="form-group full">
+          <button class="btn btn-green" type="submit">
+            Préparer ma demande
+          </button>
+        </div>
+
+      </div>
+    </form>
+
+    <div class="status-message" id="formMessage"></div>
+    <p style="font-size:12px;color:#64736e;margin-top:12px">
+      Cette première version prépare une demande de démonstration.
+      L'envoi réel nécessitera la connexion d'un service de traitement.
+    </p>
+  </div>
+</section>
+
+<section class="section" id="pharmacie">
+  <div class="section-title">
+    <h2>Espace Pharmacie</h2>
+    <p>Une section dédiée aux produits de santé autorisés.</p>
+  </div>
+  <div class="panel">
+    <h3>🏥 Produits de santé</h3>
+    <p>
+      Les produits de cette catégorie devront respecter les
+      réglementations applicables aux États-Unis et en Haïti.
+      Les médicaments soumis à prescription et les produits
+      réglementés ne seront pas proposés sans les autorisations requises.
+    </p>
+  </div>
+</section>
+
+<section class="section" id="vendeurs">
+  <div class="section-title">
+    <h2>Espace vendeurs et partenaires</h2>
+    <p>Développez votre activité commerciale avec ACHATPRO.</p>
+  </div>
+  <div class="features">
+    <div class="feature">
+      <h3>🏪 Espace vendeur</h3>
+      <p>Présentation et gestion de catalogue de produits.</p>
+    </div>
+    <div class="feature">
+      <h3>📦 Gestion des commandes</h3>
+      <p>Organisation des commandes et des livraisons.</p>
+    </div>
+    <div class="feature">
+      <h3>📈 Développement commercial</h3>
+      <p>Possibilités de partenariat et de recommandations.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section dark-section" id="panier">
+  <div class="section-title">
+    <h2>Mon panier</h2>
+    <p>Vos sélections de produits.</p>
+  </div>
+  <div class="panel" id="cartPanel">
+    <h3 style="color:#073b35">🛒 Votre panier</h3>
+    <div id="cartItems" style="margin:15px 0">
+      Votre panier est vide.
+    </div>
+    <button class="btn btn-green" onclick="checkout()">
+      Continuer ma demande
+    </button>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="section-title">
+    <h2>Services et accompagnement</h2>
+  </div>
+  <div class="features">
+    <div class="feature">
+      <h3>👤 Comptes clients</h3>
+      <p>Création de profils et historique des commandes.</p>
+    </div>
+    <div class="feature">
+      <h3>🧾 Facturation</h3>
+      <p>Devis, factures et confirmations de commande.</p>
+    </div>
+    <div class="feature">
+      <h3>🔔 Notifications</h3>
+      <p>Informations sur les commandes et livraisons.</p>
+    </div>
+    <div class="feature">
+      <h3>🛡️ Paiements</h3>
+      <p>Intégration future de solutions de paiement sécurisées.</p>
+    </div>
+    <div class="feature">
+      <h3>⚙️ Administration</h3>
+      <p>Gestion des clients, vendeurs, produits et commandes.</p>
+    </div>
+    <div class="feature">
+      <h3>💬 Assistance</h3>
+      <p>Accompagnement et service client.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-grid">
+    <div>
+      <h3>ACHATPRO</h3>
+      <p>Marché International du Shopping.</p>
+      <p>Acheter • Vendre • Recommander • Gagner.</p>
+    </div>
+
+    <div>
+      <h3>Navigation</h3>
+      <a href="#home">Accueil</a>
+      <a href="#produits">Produits</a>
+      <a href="#parrainage">Parrainage</a>
+      <a href="#international">Achats internationaux</a>
+    </div>
+
+    <div>
+      <h3>Services</h3>
+      <a href="#vendeurs">Vendeurs</a>
+      <a href="#demande">Demande d'achat</a>
+      <a href="#pharmacie">Pharmacie</a>
+      <a href="#services">Assistance</a>
+    </div>
+
+    <div>
+      <h3>Information</h3>
+      <p>Plateforme en développement.</p>
+      <p>Disponibilité et conditions à confirmer.</p>
+      <p>Les liens affiliés éventuels seront signalés.</p>
+    </div>
+  </div>
+
+  <div class="copyright">
+    © 2026 ACHATPRO — Tous droits réservés.
+    Marché International du Shopping.
+  </div>
+</footer>
+
+<script>
+let cart = [];
+
+function requestProduct(product) {
+  document.getElementById("requestedProduct").value = product;
+  document.getElementById("demande").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function filterCategory(category) {
+  document.querySelectorAll(".product-card").forEach(card => {
+    card.classList.toggle(
+      "hidden",
+      card.dataset.category !== category
+    );
+  });
+}
+
+function searchProducts() {
+  const query = document.getElementById("searchInput")
+    .value.toLowerCase().trim();
+
+  document.querySelectorAll(".product-card").forEach(card => {
+    card.classList.toggle(
+      "hidden",
+      !card.innerText.toLowerCase().includes(query)
+    );
+  });
+
+  document.getElementById("produits").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function addToCart(product) {
+  cart.push(product);
+  updateCart();
+}
+
+function updateCart() {
+  document.getElementById("cartCount").innerText = cart.length;
+
+  const area = document.getElementById("cartItems");
+
+  if (cart.length === 0) {
+    area.innerText = "Votre panier est vide.";
+    return;
+  }
+
+  area.innerHTML = "";
+
+  cart.forEach((item, index) => {
+    const line = document.createElement("p");
+    line.textContent = (index + 1) + ". " + item;
+    area.appendChild(line);
+  });
+}
+
+function checkout() {
+  if (cart.length === 0) {
+    alert("Votre panier est vide.");
+    return;
+  }
+
+  document.getElementById("requestedProduct").value =
+    cart.join(", ");
+
+  document.getElementById("demande").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function checkCoupon() {
+  const code = document.getElementById("couponInput")
+    .value.trim();
+
+  const message = document.getElementById("couponMessage");
+  message.style.display = "block";
+
+  message.textContent = code
+    ? "Le code sera vérifié par notre service lors de l'activation du système promotionnel."
+    : "Veuillez entrer un code promotionnel.";
+}
+
+function copyReferral() {
+  const code = document.getElementById("referralCode").innerText;
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(code).then(() => {
+      alert("Code copié : " + code);
+    }).catch(() => {
+      alert("Votre code : " + code);
+    });
+  } else {
+    alert("Votre code : " + code);
+  }
+}
+
+document.getElementById("purchaseForm").addEventListener(
+  "submit",
+  function(event) {
+    event.preventDefault();
+
+    const data = new FormData(this);
+    const message = document.getElementById("formMessage");
+
+    message.style.display = "block";
+    message.textContent =
+      "Votre demande de démonstration est prête. " +
+      "Le système d'envoi sera connecté lors de la prochaine étape. " +
+      "Aucune commande réelle n'a été envoyée.";
+
+    console.log("Demande de démonstration :", Object.fromEntries(data));
+  }
+);
+</script>
+
 </body>
-</html>
+        </html>
